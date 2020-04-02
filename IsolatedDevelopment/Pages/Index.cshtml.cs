@@ -1,25 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using IsolatedDevelopment.Dependencies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 
 namespace IsolatedDevelopment.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly IIntegratedDependency _dependency;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public string Message;
+
+        public IndexModel(IIntegratedDependency dependency)
         {
-            _logger = logger;
+            _dependency = dependency;
         }
 
         public void OnGet()
         {
+            Message = _dependency.GetMessage();
+        }
 
+        public IActionResult OnPost()
+        {
+            return Content(_dependency.GetMessage());
         }
     }
 }
