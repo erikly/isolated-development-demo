@@ -13,6 +13,10 @@ namespace IsolatedDevelopment.Tests
 
         public InMemoryTests(IsolatedDevelopmentWebApplicationFactory factory) => _client = factory.CreateClient();
 
+        /// <summary>
+        /// Gets work
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public async Task Index_Get_ReturnsOk()
         {
@@ -23,6 +27,10 @@ namespace IsolatedDevelopment.Tests
             response.EnsureSuccessStatusCode();
         }
 
+        /// <summary>
+        /// Posts work too after ignoring anti forgery tokens in the application factory
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public async Task Index_Post_ReturnsStubMessage()
         {

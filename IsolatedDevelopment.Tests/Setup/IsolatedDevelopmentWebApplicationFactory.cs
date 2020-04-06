@@ -1,4 +1,5 @@
 ﻿using IsolatedDevelopment.Dependencies;
+using IsolatedDevelopment.Tests.Middleware;
 using IsolatedDevelopment.Tests.Stubs;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,11 @@ namespace IsolatedDevelopment.Tests.Setup
 {
     public class IsolatedDevelopmentWebApplicationFactory : WebApplicationFactory<Startup>
     {
+        public IsolatedDevelopmentWebApplicationFactory()
+        {
+            Startup.FirstMiddlewares.Add(typeof(InjectCookieMiddleware));
+        }
+        
         protected override void ConfigureWebHost(IWebHostBuilder builder) => ConfigureServices(builder);
 
         public static void ConfigureServices(IWebHostBuilder builder)

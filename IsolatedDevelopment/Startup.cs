@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using IsolatedDevelopment.Dependencies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,19 +16,26 @@ namespace IsolatedDevelopment
             Configuration = configuration;
         }
 
+        // Couldn't find a way to add middlewares to the beginning of the pipeline without this
+        public static List<Type> FirstMiddlewares = new List<Type>();
+
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
 
+            // Add the integrated dependency
             services.AddTransient<IIntegratedDependency, IntegratedDependency>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            foreach (var middleware in FirstMiddlewares)
+            {
+                app.UseMiddleware(middleware);
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -34,7 +43,6 @@ namespace IsolatedDevelopment
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 

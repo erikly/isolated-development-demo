@@ -1,8 +1,6 @@
 ﻿using System.IO;
-using IsolatedDevelopment.Tests.Setup;
+using IsolatedDevelopment.Tests.Middleware;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 
 namespace IsolatedDevelopment.Isolated.Web
@@ -16,13 +14,11 @@ namespace IsolatedDevelopment.Isolated.Web
             return Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    Startup.FirstMiddlewares.Add(typeof(InjectCookieMiddleware));
                     webBuilder.UseStartup<Startup>();
-                    IsolatedDevelopmentWebApplicationFactory.ConfigureServices(webBuilder);
                     var webProjectName = typeof(Startup).Assembly.GetName().Name;
-                    webBuilder.ConfigureAppConfiguration((hostingContext, config) =>
-                        config.SetFileProvider(
-                            new PhysicalFileProvider($"{Directory.GetCurrentDirectory()}/../{webProjectName}")));
-                    webBuilder.UseWebRoot($"../{webProjectName}/wwwroot");
+                    var webProjectPath = $"{Directory.GetCurrentDirectory()}/../{webProjectName}";
+                    webBuilder.UseContentRoot(webProjectPath);
                 });
         }
     }
