@@ -1,6 +1,6 @@
 ﻿using IsolatedDevelopment.Dependencies;
 
-namespace IsolatedDevelopment.Tests.Setup
+namespace IsolatedDevelopment.Tests.Stubs
 {
     class IntegratedDependencyStub : IIntegratedDependency
     {

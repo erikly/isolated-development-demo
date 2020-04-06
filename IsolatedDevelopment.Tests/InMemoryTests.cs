@@ -1,8 +1,8 @@
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using IsolatedDevelopment.Dependencies;
 using IsolatedDevelopment.Tests.Setup;
+using IsolatedDevelopment.Tests.Stubs;
 using Xunit;
 
 namespace IsolatedDevelopment.Tests

@@ -1,4 +1,5 @@
 ﻿using IsolatedDevelopment.Dependencies;
+using IsolatedDevelopment.Tests.Stubs;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -9,7 +10,9 @@ namespace IsolatedDevelopment.Tests.Setup
 {
     public class IsolatedDevelopmentWebApplicationFactory : WebApplicationFactory<Startup>
     {
-        protected override void ConfigureWebHost(IWebHostBuilder builder)
+        protected override void ConfigureWebHost(IWebHostBuilder builder) => ConfigureServices(builder);
+
+        public static void ConfigureServices(IWebHostBuilder builder)
         {
             builder.ConfigureServices(services =>
             {
