@@ -18,7 +18,9 @@ To run in isolated mode:
 
 ## Notable files and concepts
 In integrated mode, `IntegratedDependency` is used and the Foo header is not set. In isolated mode, `IntegratedDependencyStub` is used and `InjectCookieMiddleware` is executed, setting a value for the Foo header. This allows for bypassing steps such as logging in when testing new features, and this is achieved with no test code in the production project.
+
 All of this is achieved with a minimum of duplication. The Program.cs file in the `Isolated.Web` assembly uses all of the code in the `Web` assembly, but injects middleware to the start of the pipeline and replaces the dependency with a stub. The application will look and behave like in integrated mode apart from injected middleware and dependency replacements.
+
 [TestHost](https://docs.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-3.1) is used in the test assembly to run integration tests on an in memory instance of the application. These tests don't have any external dependencies and can be run in any environments
 
 ## Author's notes
