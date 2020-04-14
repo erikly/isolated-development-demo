@@ -1,4 +1,4 @@
-﻿using IsolatedDevelopment.Dependencies;
+﻿using IsolatedDevelopment.Web.Dependencies;
 
 namespace IsolatedDevelopment.Tests.Stubs
 {

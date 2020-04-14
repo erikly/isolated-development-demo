@@ -1,0 +1,7 @@
+﻿@page
+@model IndexModel
+
+<div class="text-center">
+    <h1>@Html.DisplayFor(m => m.Message)</h1>
+    <h1>The value of the Foo header is: @Request.Headers["x-foo"]</h1>
+</div>

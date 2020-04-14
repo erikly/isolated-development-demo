@@ -1,6 +1,7 @@
-﻿using IsolatedDevelopment.Dependencies;
-using IsolatedDevelopment.Tests.Middleware;
+﻿using IsolatedDevelopment.Tests.Middleware;
 using IsolatedDevelopment.Tests.Stubs;
+using IsolatedDevelopment.Web;
+using IsolatedDevelopment.Web.Dependencies;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -18,6 +19,7 @@ namespace IsolatedDevelopment.Tests.Setup
         
         protected override void ConfigureWebHost(IWebHostBuilder builder) => ConfigureServices(builder);
 
+        // Extracting a static method so that it may be used from the Isolated.Web assembly
         public static void ConfigureServices(IWebHostBuilder builder)
         {
             builder.ConfigureServices(services =>

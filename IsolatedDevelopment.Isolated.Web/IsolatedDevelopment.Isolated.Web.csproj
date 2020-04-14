@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <GenerateProgramFile>false</GenerateProgramFile>
@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IsolatedDevelopment.Tests\IsolatedDevelopment.Tests.csproj" />
-    <ProjectReference Include="..\IsolatedDevelopment\IsolatedDevelopment.csproj" />
   </ItemGroup>
 
 </Project>
